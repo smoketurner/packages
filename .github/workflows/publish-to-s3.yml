@@ -1,0 +1,77 @@
+# Publishes the package repository to S3 (CloudFront origin) and invalidates
+# the CloudFront cache. Triggered by:
+#
+#   1. push to main      — covers releases pushed by upstream project workflows
+#                          via PAT (PAT-authenticated pushes propagate to
+#                          downstream workflows; GITHUB_TOKEN pushes do not)
+#   2. workflow_dispatch — manual re-sync
+#
+# Required GitHub Actions repo configuration, set by smoketurner-infra's
+# environments/github root:
+#   secrets.ASSUME_ROLE_ARN       — publisher role in shared-prod
+#   vars.PACKAGES_BUCKET          — S3 bucket backing packages.smoketurner.com
+#   vars.PACKAGES_DISTRIBUTION_ID — CloudFront distribution serving it
+
+name: Publish to S3
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - ".github/**"
+      - ".gitignore"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+
+# Serialize sync runs so concurrent pushes don't race
+concurrency:
+  group: publish-to-s3
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Sync to S3 and invalidate CloudFront
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ secrets.ASSUME_ROLE_ARN }}
+          role-session-name: smoketurner-packages-publish
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: Sync repository to S3
+        env:
+          BUCKET: ${{ vars.PACKAGES_BUCKET }}
+        run: |
+          aws s3 sync . "s3://${BUCKET}/" \
+            --delete \
+            --exclude '.git/*' \
+            --exclude '.github/*' \
+            --exclude '.gitignore' \
+            --exclude 'README.md'
+
+      - name: Invalidate CloudFront cache
+        env:
+          DISTRIBUTION_ID: ${{ vars.PACKAGES_DISTRIBUTION_ID }}
+        run: |
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id "${DISTRIBUTION_ID}" \
+            --paths '/*' \
+            --query 'Invalidation.Id' \
+            --output text)
+          echo "Invalidation $INVALIDATION_ID created" >> "$GITHUB_STEP_SUMMARY"
