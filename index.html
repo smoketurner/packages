@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smoke Turner Packages</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #e5e5e5;
+      --code-bg: #161616;
+      --border: #2a2a2a;
+      --accent: #f59e0b;
+      --accent-hover: #fbbf24;
+      --muted: #888;
+      --section-bg: #141414;
+      --badge-bg: rgba(136, 136, 136, 0.15);
+      --copy-bg: #1e1e1e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      padding: 3rem 1.5rem;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 2.5rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+    p { margin-bottom: 1rem; color: var(--muted); }
+    .subtitle { font-size: 1.05rem; margin-bottom: 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      background: var(--badge-bg);
+    }
+    .tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; }
+    .tab {
+      padding: 0.625rem 1.25rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .tab:hover { color: var(--fg); }
+    .tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+    .code-block { position: relative; margin-bottom: 1.5rem; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+    code { font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace; }
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.35rem 0.6rem;
+      font: inherit;
+      font-size: 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--copy-bg);
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .copy-btn:hover { color: var(--fg); }
+    .section {
+      background: var(--section-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .section p:last-child { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 500; }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    @media (max-width: 480px) { body { padding: 2rem 1rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smoke Turner Packages</h1>
+    <p class="subtitle">APT and YUM/DNF repositories for <a href="https://github.com/smoketurner">Smoke Turner</a> projects.</p>
+    <div class="badges">
+      <span class="badge">amd64 / x86_64</span>
+      <span class="badge">arm64 / aarch64</span>
+      <span class="badge">GPG signed</span>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="apt" id="tab-apt">APT (Debian / Ubuntu)</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="rpm" id="tab-rpm">YUM / DNF (Fedora / RHEL)</button>
+  </div>
+
+  <div id="apt" role="tabpanel" aria-labelledby="tab-apt">
+    <div class="code-block">
+      <pre><code>curl -fsSL https://packages.smoketurner.com/gpg/smoketurner.asc \
+  | gpg --dearmor \
+  | sudo tee /usr/share/keyrings/smoketurner-archive-keyring.gpg &gt; /dev/null
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/smoketurner-archive-keyring.gpg] https://packages.smoketurner.com/apt stable main" \
+  | sudo tee /etc/apt/sources.list.d/smoketurner.list &gt; /dev/null
+
+sudo apt-get update &amp;&amp; sudo apt-get install -y quack</code></pre>
+      <button class="copy-btn" type="button">Copy</button>
+    </div>
+  </div>
+
+  <div id="rpm" role="tabpanel" aria-labelledby="tab-rpm" hidden>
+    <div class="code-block">
+      <pre><code>sudo tee /etc/yum.repos.d/smoketurner.repo &lt;&lt; 'EOF'
+[smoketurner]
+name=Smoke Turner
+baseurl=https://packages.smoketurner.com/rpm/$basearch/
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.smoketurner.com/gpg/smoketurner.asc
+enabled=1
+EOF
+
+sudo dnf install -y quack</code></pre>
+      <button class="copy-btn" type="button">Copy</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Packages</h2>
+    <table>
+      <thead><tr><th>Package</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/smoketurner/quack"><code>quack</code></a></td><td>Air-gapped knowledge engine: documents, tables, and a knowledge graph</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>GPG key</h2>
+    <p>RPM packages and all repository metadata are signed with the key at
+      <a href="/gpg/smoketurner.asc">/gpg/smoketurner.asc</a>, fingerprint
+      <code>F004 4C01 F2D0 4F5E 44E5 18FE 84C0 D1A3 4448 CC13</code>.</p>
+  </div>
+
+  <footer>
+    <span>packages.smoketurner.com</span>
+    <a href="https://github.com/smoketurner/packages">GitHub</a>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.tab').forEach(function (t) {
+          var selected = t === tab;
+          t.setAttribute('aria-selected', String(selected));
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+        });
+      });
+    });
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.previousElementSibling.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

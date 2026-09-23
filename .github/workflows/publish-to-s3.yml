@@ -20,6 +20,8 @@ on:
     paths-ignore:
       - ".github/**"
       - ".gitignore"
+      - "**/.gitkeep"
+      - "apt-ftparchive.conf"
       - "README.md"
   workflow_dispatch:
 
@@ -63,6 +65,8 @@ jobs:
             --exclude '.git/*' \
             --exclude '.github/*' \
             --exclude '.gitignore' \
+            --exclude '*.gitkeep' \
+            --exclude 'apt-ftparchive.conf' \
             --exclude 'README.md'
 
       - name: Invalidate CloudFront cache
