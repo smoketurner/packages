@@ -1,0 +1,28 @@
+Architectures: amd64 arm64
+Codename: stable
+Components: main
+Date: Mon, 28 Sep 2026 16:14:02 +0000
+Description: Smoke Turner packages
+Label: Smoke Turner
+Origin: Smoke Turner
+Suite: stable
+MD5Sum:
+ b21286533f627e372dd17a5bbd53c4b3              554 main/binary-amd64/Packages
+ d069be00e0ae47b3e0e2860fa12280f0              407 main/binary-amd64/Packages.gz
+ 907f9e7e7bff4c66a7d74e8d2148b6df              554 main/binary-arm64/Packages
+ 7ba44301b4c9bb0f04e694d6034d6502              410 main/binary-arm64/Packages.gz
+SHA1:
+ 36ad2464e851b885061048a609513ea4330b3cf6              554 main/binary-amd64/Packages
+ 879bb16809dc110f56d5daafb45ecc8336cfb6d7              407 main/binary-amd64/Packages.gz
+ 615e434ae7d6ca8aa9dfef637a3ed39d420a6952              554 main/binary-arm64/Packages
+ f5b927e5f824af60e85554361e2da2d329bcad27              410 main/binary-arm64/Packages.gz
+SHA256:
+ c530063c4c218328bc985d94bb9efc03d493ffb65c26c0d68fa7db45c71acf79              554 main/binary-amd64/Packages
+ 8a95777f98721b02f9fdf59713b9b3a187dac78b48974d48b18aaa1fa2dff598              407 main/binary-amd64/Packages.gz
+ 76deda344eff3180efb5476dda4b1f963916aaf4649db3b165ceb8f11ea96db1              554 main/binary-arm64/Packages
+ 3ebb72aa17f97ccfe50320f430c76eb5d415453921f4ddf35e45f5edfdaab66d              410 main/binary-arm64/Packages.gz
+SHA512:
+ fdda887c27930118302b013198e41ba34b82f2883763480dda3b0229992a16a6753a2d3ad4999ac59bf9180c75488709af87647af30fe93375d60fc47aa44e1c              554 main/binary-amd64/Packages
+ 665e874257f1027764e3f5483dbbea5b32db27875044ae5092ed47617a3bea170d43b958d41154ebbcc281e7d2b88451870438c40755a124c390fbde9c9ca82b              407 main/binary-amd64/Packages.gz
+ 62839c6c9b2fde2d5039543857b4aab79fec33a8048116c6cd1e87d5f1449afa3859cee2126a868226afdac2359c04c9a047668f722de253c09ddfdeeb06f45e              554 main/binary-arm64/Packages
+ f1abd2254043728ef4ef0dcc7d9230de673f9fd9c7e6ea7e86f433d01a49a32a6995cd684a7d19d9890db5d24a76b2c2952ff6d0f85eb7d6e9b59ceb70a1da04              410 main/binary-arm64/Packages.gz
