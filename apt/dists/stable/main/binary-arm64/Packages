@@ -14,6 +14,21 @@ Homepage: https://github.com/smoketurner/quack
 Description: Air-gapped knowledge engine: documents, tables, and a knowledge graph, with a web UI, REST API, and MCP server
 
 Package: quack
+Version: 2026.10.2
+Architecture: arm64
+Maintainer: Smoke Turner <packages@smoketurner.com>
+Installed-Size: 48460
+Filename: pool/main/quack_2026.10.2_arm64.deb
+Size: 25205490
+MD5sum: 20e019b29988cd50b84cdec2b481f6f4
+SHA1: e62e10da8cbcce9e6fb7e21b8c39d64daef00a8f
+SHA256: 9fa133b461713f0de1aaaad46d35295fb169a7bb3fa124d49c0366ec660931dc
+Section: utils
+Priority: optional
+Homepage: https://github.com/smoketurner/quack
+Description: Air-gapped knowledge engine: documents, tables, and a knowledge graph, with a web UI, REST API, and MCP server
+
+Package: quack
 Version: 2026.9.3
 Architecture: arm64
 Maintainer: Smoke Turner <packages@smoketurner.com>
