@@ -165,9 +165,13 @@ sudo dnf install -y quack</code></pre>
 
   <div class="section">
     <h2>GPG key</h2>
-    <p>RPM packages and all repository metadata are signed with the key at
+    <p>RPM packages and all repository metadata are signed with the first key in
       <a href="/gpg/smoketurner.asc">/gpg/smoketurner.asc</a>, fingerprint
-      <code>F004 4C01 F2D0 4F5E 44E5 18FE 84C0 D1A3 4448 CC13</code>.</p>
+      <code>2C22 0832 BA6C 2E3B A473 2872 0FAF 9503 9976 553C</code>.</p>
+    <p>The file also carries the key retired on 2026-11-18, fingerprint
+      <code>F004 4C01 F2D0 4F5E 44E5 18FE 84C0 D1A3 4448 CC13</code>, which signed the RPMs
+      released before then. If you set up the APT repository before that date,
+      run the keyring step above again.</p>
   </div>
 
   <footer>
