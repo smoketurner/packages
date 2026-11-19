@@ -4,9 +4,12 @@ APT and YUM/DNF repositories for [Smoke Turner](https://github.com/smoketurner) 
 
 | Package | Types | Architectures |
 |---------|-------|---------------|
+| [`apigw`](https://github.com/smoketurner/amazon-apigateway-self-hosted) | `.deb`, `.rpm` | amd64/x86_64, arm64/aarch64 |
 | [`quack`](https://github.com/smoketurner/quack) | `.deb`, `.rpm` | amd64/x86_64, arm64/aarch64 |
 
 ## Installation
+
+The commands below install `quack`; put any package from the table in its place.
 
 ### APT (Debian / Ubuntu)
 
