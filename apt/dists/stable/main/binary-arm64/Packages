@@ -1,3 +1,18 @@
+Package: apigw
+Version: 2026.11.4
+Architecture: arm64
+Maintainer: Smoke Turner <packages@smoketurner.com>
+Installed-Size: 9650
+Filename: pool/main/apigw_2026.11.4_arm64.deb
+Size: 5459702
+MD5sum: 2a5a1ad2ffd5a7b23dfdd1bd32762a93
+SHA1: e515a035043859a7d52506905f854653a72daa65
+SHA256: 9087d2f4f3ab5d2aabf9105f0bed94953cf783188c82e0f76bade31d6e69f6f3
+Section: net
+Priority: optional
+Homepage: https://github.com/smoketurner/amazon-apigateway-self-hosted
+Description: Self-hosted gateway that serves an existing Amazon API Gateway's routes
+
 Package: quack
 Version: 2026.10.1
 Architecture: arm64
